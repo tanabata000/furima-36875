@@ -2,21 +2,22 @@
 
 ## users テーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| nickname           | string | null: false |
-| email              | string | unique:true |
-| encrypted_password | string | null: false |
-| family_name        | string | null: false |
-| first_name         | string | null: false |
-| family_name_kana   | string | null: false |
-| first_name_kana    | string | null: false |
-| birthday           | date   | null: false |
+| Column             | Type   | Options                  |
+| ------------------ | ------ | ------------------------ |
+| nickname           | string | null: false              |
+| email              | string | null: false, unique:true |
+| encrypted_password | string | null: false              |
+| family_name        | string | null: false              |
+| first_name         | string | null: false              |
+| family_name_kana   | string | null: false              |
+| first_name_kana    | string | null: false              |
+| birthday           | date   | null: false              |
 
 ### Association
 
 - has_many :items
 - has_many :comments
+- has_many :histories
 
 
 ## items テーブル
@@ -36,6 +37,7 @@
 ### Association
 
 - belongs_to :user
+- belongs_to :histories
 - has_many :comments
 
 
@@ -61,12 +63,13 @@
 | prefecture_id     | integer    | null: false                    |
 | town              | string     | null: false                    |
 | street_num        | string     | null: false                    |
-| building_name     | string     | null: true                     |
+| building_name     | string     |                                |
 | phone_num         | integer    | null: false                    |
+| history_id        | references | null: false, foreign_key: true |
 
 ### Association
-
-- has_many :histories
+<!-- addressがhistoriesに従属される側 -->
+- belongs_to :histories
 
 
 ## histories テーブル
@@ -78,5 +81,7 @@
 
 ### Association
 
-- belongs_to :address
 - belongs_to :user
+- belongs_to :item
+<!-- historiesがaddressを従属させる側 -->
+- has_one :address
