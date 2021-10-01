@@ -7,37 +7,37 @@
 | nickname           | string | null: false              |
 | email              | string | null: false, unique:true |
 | encrypted_password | string | null: false              |
-| family_name        | string | null: false              |
+| last_name          | string | null: false              |
 | first_name         | string | null: false              |
-| family_name_kana   | string | null: false              |
+| last_name_kana     | string | null: false              |
 | first_name_kana    | string | null: false              |
-| birthday           | date   | null: false              |
+| birth_date         | date   | null: false              |
 
 ### Association
 
 - has_many :items
 - has_many :comments
-- has_many :histories
+- has_many :buy_item_infos
 
 
 ## items テーブル
 
-| Column                | Type       | Options                        |
-| --------------------- | -----------| ------------------------------ |
-| user                  | references | null: false, foreign_key: true |
-| item_name             | string     | null: false                    |
-| item_description      | text       | null: false                    |
-| item_category_id      | integer    | null: false                    |
-| item_condition_id     | integer    | null: false                    |
-| item_delivery_cost_id | integer    | unique:true                    |
-| item_send_area_id     | integer    | null: false                    |
-| item_send_schedule_id | integer    | null: false                    |
-| item_price            | integer    | null: false                    |
+| Column                      | Type       | Options                        |
+| --------------------------- | -----------| ------------------------------ |
+| user                        | references | null: false, foreign_key: true |
+| item_name                   | string     | null: false                    |
+| item_info                   | text       | null: false                    |
+| item_category_id            | integer    | null: false                    |
+| item_sales_status_id        | integer    | null: false                    |
+| item_shipping_fee_status_id | integer    | null: false                    |
+| item_prefecture_id          | integer    | null: false                    |
+| item_scheduled_delivery_id  | integer    | null: false                    |
+| item_price                  | integer    | null: false                    |
 
 ### Association
 
 - belongs_to :user
-- belongs_to :histories
+- has_one :buy_item_info
 - has_many :comments
 
 
@@ -55,33 +55,35 @@
 - belongs_to :item
 
 
-## addresses テーブル
+## buy_item_infos テーブル
 
 | Column            | Type       | Options                        |
 | ----------------- | ---------- | ------------------------------ |
-| zip_code          | string     | null: false                    |
-| prefecture_id     | integer    | null: false                    |
-| town              | string     | null: false                    |
-| street_num        | string     | null: false                    |
-| building_name     | string     |                                |
-| phone_num         | integer    | null: false                    |
-| history_id        | references | null: false, foreign_key: true |
-
-### Association
-<!-- addressがhistoriesに従属される側 -->
-- belongs_to :histories
-
-
-## histories テーブル
-
-| Column            | Type       | Options                        |
-| ----------------- | ---------- | ------------------------------ |
-| item_id           | integer    | null: false                    |
-| user_id           | integer    | null: false                    |
+| item_id           | integer    | null: false, foreign_key: true |
+| user_id           | integer    | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
 - belongs_to :item
 <!-- historiesがaddressを従属させる側 -->
-- has_one :address
+- has_one :shipping_address
+
+
+## shipping_addresses テーブル
+
+| Column             | Type       | Options                        |
+| -----------------  | ---------- | ------------------------------ |
+| postal_code        | string     | null: false                    |
+| item_prefecture_id | integer    | null: false                    |
+| city               | string     | null: false                    |
+| addresses          | string     | null: false                    |
+| building           | string     |                                |
+| phone_number       | string     | null: false                    |
+| buy_item_info_id   | references | null: false, foreign_key: true |
+
+### Association
+<!-- addressがhistoriesに従属される側 -->
+- belongs_to :buy_item_info
+
+
