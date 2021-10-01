@@ -11,34 +11,33 @@
 | first_name         | string | null: false |
 | family_name_kana   | string | null: false |
 | first_name_kana    | string | null: false |
-| birth_year         | string | null: false |
-| birth_month        | string | null: false |
-| birth_day          | string | null: false |
+| birthday           | date   | null: false |
 
 ### Association
 
 - has_many :items
 - has_many :comments
 
+
 ## items テーブル
 
-| Column             | Type       | Options                        |
-| ------------------ | -----------| ------------------------------ |
-| user               | references | null: false, foreign_key: true |
-| item_name          | text       | null: false                    |
-| item_description   | text       | null: false                    |
-| item_category      | string     | null: false                    |
-| item_condition     | string     | null: false                    |
-| item_delivery_cost | string     | unique:true                    |
-| item_send_area     | string     | null: false                    |
-| item_send_schedule | string     | null: false                    |
-| item_price         | string     | null: false                    |
-
+| Column                | Type       | Options                        |
+| --------------------- | -----------| ------------------------------ |
+| user                  | references | null: false, foreign_key: true |
+| item_name             | string     | null: false                    |
+| item_description      | text       | null: false                    |
+| item_category_id      | integer    | null: false                    |
+| item_condition_id     | integer    | null: false                    |
+| item_delivery_cost_id | integer    | unique:true                    |
+| item_send_area_id     | integer    | null: false                    |
+| item_send_schedule_id | integer    | null: false                    |
+| item_price            | integer    | null: false                    |
 
 ### Association
 
 - belongs_to :user
 - has_many :comments
+
 
 ## comments テーブル
 
@@ -52,3 +51,32 @@
 
 - belongs_to :user
 - belongs_to :item
+
+
+## addresses テーブル
+
+| Column            | Type       | Options                        |
+| ----------------- | ---------- | ------------------------------ |
+| zip_code          | string     | null: false                    |
+| prefecture_id     | integer    | null: false                    |
+| town              | string     | null: false                    |
+| street_num        | string     | null: false                    |
+| building_name     | string     | null: true                     |
+| phone_num         | integer    | null: false                    |
+
+### Association
+
+- has_many :histories
+
+
+## histories テーブル
+
+| Column            | Type       | Options                        |
+| ----------------- | ---------- | ------------------------------ |
+| item_id           | integer    | null: false                    |
+| user_id           | integer    | null: false                    |
+
+### Association
+
+- belongs_to :address
+- belongs_to :user
