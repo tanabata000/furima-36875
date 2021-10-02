@@ -46,8 +46,8 @@
 | Column      | Type       | Options                        |
 | ----------- | ---------- | ------------------------------ |
 | text        | text       | null: false                    |
-| item_id     | references | null: false, foreign_key: true |
-| user_id     | references | null: false, foreign_key: true |
+| item        | references | null: false, foreign_key: true |
+| user        | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -59,8 +59,8 @@
 
 | Column            | Type       | Options                        |
 | ----------------- | ---------- | ------------------------------ |
-| item_id           | integer    | null: false, foreign_key: true |
-| user_id           | integer    | null: false, foreign_key: true |
+| item              | references | null: false, foreign_key: true |
+| user              | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -80,7 +80,7 @@
 | addresses          | string     | null: false                    |
 | building           | string     |                                |
 | phone_number       | string     | null: false                    |
-| buy_item_info_id   | references | null: false, foreign_key: true |
+| buy_item_info      | references | null: false, foreign_key: true |
 
 ### Association
 <!-- addressがhistoriesに従属される側 -->
