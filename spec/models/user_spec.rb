@@ -54,15 +54,42 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
       end
+
+      it 'PWは数字のみでは登録できない' do
+        @user.password = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid", "Password confirmation doesn't match Password")
+      end
+      it 'PWは英字のみでは登録できない' do
+        @user.password = '111111'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+      end
+      it 'PWは全角では登録できない' do
+        @user.password = 'ああああア亜'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password", "Password is invalid")
+      end
       it '苗字が存在しない' do
         @user.last_name = ''
         @user.valid?
         expect(@user.errors.full_messages).to include("Last name can't be blank", "Last name is invalid")
       end
+      it '苗字が日本語以外' do
+        @user.last_name = 'aaaaaaaa'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name is invalid")
+      end
+
       it '名前が存在しない' do
         @user.first_name = ''
         @user.valid?
         expect(@user.errors.full_messages).to include("First name can't be blank", "First name is invalid")
+      end
+      it '名前が日本語以外' do
+        @user.last_name = 'aaaaaaaa'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name is invalid")
       end
       it '苗字（カナ）が存在しない' do
         @user.last_name_kana = ''
