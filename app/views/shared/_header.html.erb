@@ -17,7 +17,7 @@
     <ul class='lists-right'>
       <%# ログイン状態：ニックネーム & ログアウト表示%>
       <% if user_signed_in? %>
-        <li><%= link_to current_user.nickname, "#", class: "user-nickname" %></li>
+        <li><%= link_to current_user.nickname, new_user_registration_path, class: "user-nickname" %></li>
         <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout" %></li> 
       <%# 未ログイン状態：ログイン & 新規作成表示%>
       <% else %>
