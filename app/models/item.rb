@@ -20,6 +20,7 @@ class Item < ApplicationRecord
     # 全て半角数字
     hankaku_num = /\A[0-9]+\z/
   # バリデーション
+  # validates :user_id, presence: true
   validates :image, presence: true
   validates :item_name, presence: true
   validates :item_info, presence: true
