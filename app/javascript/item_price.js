@@ -3,8 +3,8 @@ function sell_price_content (){
   // HTML要素取得
   // 価格フォーム部分（対象id:item-price）
   const ItemPrice = document.getElementById("item-price")
+  // item-priceを取得できた時のみ処理をするように設定
   if(ItemPrice){
-
   
   // 販売手数料の表示部分（対象id:add-tax-price）
   const AddTaxPrice = document.getElementById("add-tax-price")

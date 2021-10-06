@@ -17,12 +17,13 @@ RSpec.describe User, type: :model do
   
     context '出品できないとき' do
       it '商品画像が存在しない' do
+        # 画像が存在しない場合、値がnilとなるため。文字列ならば''で空欄を入力することで結果的にnilとなる。
         @item.image = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Image can't be blank")
       end
       it '商品名が存在しない' do
-        @item.item_name = ''
+        @item.item_name = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Item name can't be blank")
       end
