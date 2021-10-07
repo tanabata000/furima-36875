@@ -1,9 +1,9 @@
 <%# app/views/devise/registrations/new.html.erb %>
 <%# model_err = f.object = @user（deviseのモデル） %>
-<% if model_err.errors.any? %>
+<% if model.errors.any? %>
 <div class="error-alert">
   <ul>
-    <% model_err.errors.full_messages.each do |message| %>
+    <% model.errors.full_messages.each do |message| %>
     <li class='error-message'><%= message %></li>
     <% end %>
   </ul>
