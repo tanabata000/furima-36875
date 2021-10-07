@@ -7,9 +7,9 @@ class ItemsController < ApplicationController
   
   def index
     # 【SQLの内容】テーブル（items）選択。降順に並べ替える（投稿が新しい順）
-    # query = "SELECT * FROM items ORDER BY created_at DESC"
+    query = "SELECT * FROM items ORDER BY created_at DESC"
     # SQL使用（対象：Item 実行内容：query）
-    # @items = Item.find_by_sql(query)
+    @items = Item.find_by_sql(query)
     # @items = Item.order("created_at DESC")
   end
 
