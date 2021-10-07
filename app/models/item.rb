@@ -15,10 +15,10 @@ class Item < ApplicationRecord
   # Active Storageとのアソシエーション設定
   # アソシエーションを組むと同時にでカラム名を決定する。カラム名＝image
   has_one_attached :image
-  
-   # 正規表現
-    # 全て半角数字
-    hankaku_num = /\A[0-9]+\z/
+
+  # 正規表現
+  # 全て半角数字
+  hankaku_num = /\A[0-9]+\z/
   # バリデーション
   # validates :user_id, presence: true
   validates :image, presence: true
@@ -32,14 +32,14 @@ class Item < ApplicationRecord
   # format:は文字列にしか適用しないためnumericality:を使用
   validates :item_price, presence: true, numericality: { with: hankaku_num }
   # validates_inclusion_of：値が配列・範囲に含まれているかを確認する
-  validates_inclusion_of :item_price, in: 300..9999999 
-  
+  validates_inclusion_of :item_price, in: 300..9_999_999
+
   # ActiveHashのバリデーション
   # ジャンルの選択が「--」の時は保存できないようにする
   # 「can't be blank」というエラーメッセージがユーザーに表示されるよう設定
-  validates :item_category_id, numericality: { other_than: 1 , message: "can't be blank"}
-  validates :item_prefecture_id, numericality: { other_than: 1 , message: "can't be blank"}
-  validates :item_sales_status_id, numericality: { other_than: 1 , message: "can't be blank"}
-  validates :item_scheduled_delivery_id, numericality: { other_than: 1 , message: "can't be blank"}
-  validates :item_shipping_fee_status_id, numericality: { other_than: 1 , message: "can't be blank"}
+  validates :item_category_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :item_prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :item_sales_status_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :item_scheduled_delivery_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :item_shipping_fee_status_id, numericality: { other_than: 1, message: "can't be blank" }
 end
