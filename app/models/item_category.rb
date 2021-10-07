@@ -13,7 +13,7 @@ class ItemCategory < ActiveHash::Base
     { id: 10, name: 'ハンドメイド' },
     { id: 11, name: 'その他' }
   ]
-   # メニュー管理モデルのアソシエーションを設定
-   include ActiveHash::Associations
-   has_many :items
+  # メニュー管理モデルのアソシエーションを設定
+  include ActiveHash::Associations
+  has_many :items
 end
