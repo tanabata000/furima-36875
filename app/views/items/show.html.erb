@@ -7,7 +7,7 @@
       <%= @item.item_name %>
     </h2>
     <div class="item-img-content">
-      <%= image_tag @item.image ,class:"item-box-img" %>
+      <%# <%= image_tag @item.image ,class:"item-box-img" %> %>
       
       <div class="sold-out">
       <%# 商品が売れている場合は、sold outを表示 %>
@@ -19,26 +19,26 @@
     </div>
     <div class="item-price-box">
       <span class="item-price">
-        ¥ <%= @item.item_price %>
+        <%# ¥ <%= @item.item_price %> %>
       </span>
       <span class="item-postage">
         <%= @item.item_shipping_fee_status.name %>
       </span>
     </div>
 
-    
   <% if user_signed_in?%>
     <% if current_user == @item.user %>
     <%= link_to "商品の編集", "#", method: :get, class: "item-red-btn" %>
     <p class="or-text">or</p>
-    <%= link_to "削除", "#", method: :delete, class:"item-destroy" %> 
+    <%= link_to "削除", "#", method: :delete, class:"item-destroy" %>
     <% else %>
     <%= link_to "購入画面に進む", "#" ,class:"item-red-btn"%>
     <% end %>
   <% end %>
 
+
     <div class="item-explain-box">
-      <span><%= "商品説明" %></span>
+      <span><%= @item.item_info %></span>
     </div>
     <table class="detail-table">
       <tbody>
@@ -104,7 +104,7 @@
     </a>
   </div>
   <%# 詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
-  <a href="#" class="another-item"><%= "商品のカテゴリー名" %>をもっと見る</a>
+  <a href="#" class="another-item"><%= @item.item_category %>をもっと見る</a>
   <%# //詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
 </div>
 
