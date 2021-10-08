@@ -140,7 +140,7 @@
                 <%# 商品の画像を表示 %>
                 <%= image_tag item.image,class: "item-img" %>
                 <%# 商品購入済みの場合sold outを表示 %>
-                <% if item.buy_item_info == true %>
+                <% if item.buy_item_info.present? == true %>
                   <div class='sold-out'>
                     <span>Sold Out!!</span>
                   </div>
