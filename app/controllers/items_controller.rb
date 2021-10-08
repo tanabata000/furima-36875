@@ -28,17 +28,15 @@ class ItemsController < ApplicationController
     end
   end
 
-  def edit    
+  def edit
     @item = Item.find(params[:id])
     # 出品者のみ編集可能。ただし購入済みの場合、出品者でも編集不可
     # ログイン中のユーザーと出品者が違う場合
     if current_user != @item.user
       redirect_to root_path
-    else
+    elsif @item.buy_item_info.present? == true
       # 製品が購入されている場合、一覧画面に遷移
-      if @item.buy_item_info.present? == true
-        redirect_to root_path
-      end
+      redirect_to root_path
     end
   end
 
