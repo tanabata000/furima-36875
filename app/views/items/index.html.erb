@@ -132,19 +132,20 @@
       <%# unless @items.empty? %>
       <% if @items.present? %>
         <% @items.each do |item| %>
-          <li class='list'>
-            
+          <li class='list'>            
+          <%# 商品画像に実装される機能 %>
+            <%# 商品詳細画面に遷移 %>
             <%= link_to item_path(item.id),method: :get do %>
               <div class='item-img-content'>
+                <%# 商品の画像を表示 %>
                 <%= image_tag item.image,class: "item-img" %>
-                <%# 商品が売れていればsold outを表示しましょう %>
-                <%# <% if item.buy_item_info == true %> %>
+                <%# 商品購入済みの場合sold outを表示 %>
+                <% if item.buy_item_info == true %>
                   <div class='sold-out'>
                     <span>Sold Out!!</span>
                   </div>
-                <%# <% end %> %>
+                <% end %>
                  
-                <%# //商品が売れていればsold outを表示しましょう %>
               </div>
               <div class='item-info'>
                 <h3 class='item-name'>
