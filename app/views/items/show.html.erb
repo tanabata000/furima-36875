@@ -25,20 +25,23 @@
         <%= @item.item_shipping_fee_status.name %>
       </span>
     </div>
-
-    <%# ログインユーザーにより表示ボタンを変える %>
+  
+  
     <%# ログイン状態の場合 %>
-  <% if user_signed_in?%>
-    <%# 現在のユーザーが出品者の場合 %>
-    <% if current_user == @item.user %>
-    <%= link_to "商品の編集", edit_item_path, method: :get, class: "item-red-btn" %>
-    <p class="or-text">or</p>
-    <%= link_to "削除", "#", method: :delete, class:"item-destroy" %>
-    <%# 現在のユーザーが出品者でない場合 %>
-    <% else %>
-    <%= link_to "購入画面に進む", "#" ,class:"item-red-btn"%>
+    <% if user_signed_in?%>
+      <%# 現在のユーザーが出品者の場合 %>
+      <% if current_user == @item.user %>
+        <%= link_to "商品の編集", edit_item_path, method: :get, class: "item-red-btn" %>
+        <p class="or-text">or</p>
+        <%= link_to "削除", "#", method: :delete, class:"item-destroy" %>
+        <%# 現在のユーザーが出品者でない場合 %>
+      <% else %>
+      <%= link_to "購入画面に進む", "#" ,class:"item-red-btn"%>
+      <% end %>
     <% end %>
-  <% end %>
+  
+
+  
 
 
     <div class="item-explain-box">
