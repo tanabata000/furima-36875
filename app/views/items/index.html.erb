@@ -130,7 +130,7 @@
 
       <%# 商品が存在する場合 ＝ 商品が空ではない場合（どちらを使用しても良い） %>
       <%# unless @items.empty? %>
-      <% if @items.present? %>
+      <% if @items.present? == true %>
         <% @items.each do |item| %>
           <li class='list'>            
           <%# 商品画像に実装される機能 %>
