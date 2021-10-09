@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   # before_action :move_to_index, except: [:index, :show]
 
   before_action :authenticate_user!, except: [:index, :show]
-
+  before_action :item_find, except: [:index, :new, :create]
   def index
     # 【SQLの内容】テーブル（items）選択。降順に並べ替える（投稿が新しい順）
     query = 'SELECT * FROM items ORDER BY created_at DESC'
@@ -29,17 +29,31 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    # 出品者のみ編集可能。ただし購入済みの場合、出品者でも編集不可
+    # ログイン中のユーザーと出品者が違う場合
+    if current_user != @item.user
+      redirect_to root_path
+# 【購入機能】実装時にコメントアウト解除
+    # elsif @item.buy_item_info.present? == true
+      # 製品が購入されている場合、一覧画面に遷移
+      # redirect_to root_path
+# //【購入機能】実装時にコメントアウト解除
+    end
   end
 
   def update
+    if @item.update(item_params)
+      redirect_to item_path, method: :get
+    else
+      render :edit
+    end
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
-  def destroy
-  end
+  # def destroy
+  # end
 
   private
 
@@ -48,6 +62,9 @@ class ItemsController < ApplicationController
                                  :item_shipping_fee_status_id, :item_prefecture_id, :item_scheduled_delivery_id, :item_price).merge(user_id: current_user.id)
   end
 
+  def item_find
+    @item = Item.find(params[:id])
+  end
   # 下記はauthenticate_user!では細かい指定ができない場合に使用
   # def move_to_index
   # unless user_signed_in?
