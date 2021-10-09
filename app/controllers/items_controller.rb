@@ -33,15 +33,17 @@ class ItemsController < ApplicationController
     # ログイン中のユーザーと出品者が違う場合
     if current_user != @item.user
       redirect_to root_path
-    elsif @item.buy_item_info.present? == true
+# 【購入機能】実装時にコメントアウト解除
+    # elsif @item.buy_item_info.present? == true
       # 製品が購入されている場合、一覧画面に遷移
-      redirect_to root_path
+      # redirect_to root_path
+# //【購入機能】実装時にコメントアウト解除
     end
   end
 
   def update
     if @item.update(item_params)
-      redirect_to root_path
+      redirect_to item_path, method: :get
     else
       render :edit
     end
