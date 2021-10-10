@@ -1,10 +1,10 @@
 class ItemsController < ApplicationController
+  
   # 未ログインユーザーをログインページにリダイレクトする。例外アクション[:index, :show]
-  # 下記のコードでも実行可能。使用する際はprivateに記載されているmove_to_indexメソッドもコメントアウト解除
-  # before_action :move_to_index, except: [:index, :show]
-
   before_action :authenticate_user!, except: [:index, :show]
   before_action :item_find, except: [:index, :new, :create]
+  before_action :move_to_index, only: [:edit, :destroy]
+
   def index
     # 【SQLの内容】テーブル（items）選択。降順に並べ替える（投稿が新しい順）
     query = 'SELECT * FROM items ORDER BY created_at DESC'
@@ -29,16 +29,11 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    # 出品者のみ編集可能。ただし購入済みの場合、出品者でも編集不可
-    # ログイン中のユーザーと出品者が違う場合
-    if current_user != @item.user
-      redirect_to root_path
 # 【購入機能】実装時にコメントアウト解除
     # elsif @item.buy_item_info.present? == true
       # 製品が購入されている場合、一覧画面に遷移
       # redirect_to root_path
 # //【購入機能】実装時にコメントアウト解除
-    end
   end
 
   def update
@@ -53,26 +48,24 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    if current_user == @item.user
-      @item.destroy
-    end
-    redirect_to root_path
+    @item.destroy
   end
 
   private
 
   def item_params
-    params.require(:item).permit(:image, :item_name, :item_info, :item_category_id, :item_sales_status_id,
-                                 :item_shipping_fee_status_id, :item_prefecture_id, :item_scheduled_delivery_id, :item_price).merge(user_id: current_user.id)
+    params.require(:item).permit(:image, :item_name, :item_info, :item_category_id, :item_sales_status_id, :item_shipping_fee_status_id, :item_prefecture_id, :item_scheduled_delivery_id, :item_price).merge(user_id: current_user.id)
   end
 
   def item_find
     @item = Item.find(params[:id])
   end
-  # 下記はauthenticate_user!では細かい指定ができない場合に使用
-  # def move_to_index
-  # unless user_signed_in?
-  # redirect_to new_user_session_path
-  # end
-  # end
+
+  # ログインユーザーと出品者が一致しない場合、一覧ページに遷移
+  def move_to_index
+    if current_user != @item.user
+      redirect_to root_path
+    end
+  end
+  
 end
