@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  
+
   # 未ログインユーザーをログインページにリダイレクトする。例外アクション[:index, :show]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :item_find, except: [:index, :new, :create]
@@ -29,11 +29,10 @@ class ItemsController < ApplicationController
   end
 
   def edit
-# 【購入機能】実装時にコメントアウト解除
-    # elsif @item.buy_item_info.present? == true
-      # 製品が購入されている場合、一覧画面に遷移
-      # redirect_to root_path
-# //【購入機能】実装時にコメントアウト解除
+    # 製品が購入されている場合、一覧画面に遷移
+    if @item.buy_item_info.present? == true
+      redirect_to root_path
+    end
   end
 
   def update
