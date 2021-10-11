@@ -7,16 +7,22 @@ class Order
   # buy_item_info ＆ shipping_addressに保存したいカラム名を、すべて指定
   attr_accessor :user_id, :item_id, :postal_code, :item_prefecture_id, :city, :addresses, :building, :phone_number, :buy_item_info, :item_price, :token
   
+  # 正規表現
+  # 全て数字（3桁ハイフン4桁）
+  postal_code_num = /\A\d{3}[-]\d{4}\z/
+  # 全て数字（10〜11桁）
+  phone_number_num  = /\A\d{10,11}\z/
+  
+  # バリデーション設定
   # buy_item_infoのバリデーション
   validates :item_id, presence: true
   validates :user_id, presence: true
-
   # shipping_addressのバリデーション
-  validates :postal_code, presence: true
+  validates :postal_code, presence: true, numericality: { with: postal_code_num }
   validates :item_prefecture_id, presence: true
   validates :city, presence: true
   validates :addresses, presence: true
-  validates :phone_number, presence: true
+  validates :phone_number, presence: true, numericality: { with: phone_number_num }
   # データベース上に表示はされないがトークンにバリデーションをかけることができる
   validates :token, presence: true
 
