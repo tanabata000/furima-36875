@@ -4,6 +4,5 @@ class BuyItemInfo < ApplicationRecord
   belongs_to :item
 
   # バリデーション
-  validates :item, presence: true
-  validates :user, presence: true
+  # フォームオブジェクト（Order）に記載
 end
