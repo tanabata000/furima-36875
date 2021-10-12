@@ -6,9 +6,7 @@ class OrdersController < ApplicationController
 
   def index
     # 購入済み商品 or 出品者自身が購入画面に遷移しようとした場合
-    if @item.buy_item_info.present? == true || @item.user_id == current_user.id
-      redirect_to root_path
-    end
+    redirect_to root_path if @item.buy_item_info.present? == true || @item.user_id == current_user.id
   end
 
   def create
