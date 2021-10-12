@@ -1,12 +1,14 @@
 class OrdersController < ApplicationController
-  
   # メソッドのセットアップ
   before_action :authenticate_user!
   before_action :item_find, only: [:index, :create]
   before_action :order_new, only: [:index]
 
   def index
-    redirect_to root_path if @item.buy_item_info.present? == true
+    # 購入済み商品 or 出品者自身が購入画面に遷移しようとした場合
+    if @item.buy_item_info.present? == true || @item.user_id == current_user.id
+      redirect_to root_path
+    end
   end
 
   def create
