@@ -29,7 +29,9 @@ class ItemsController < ApplicationController
 
   def edit
     # 製品が購入されている場合、一覧画面に遷移
-    redirect_to root_path if @item.buy_item_info.present? == true
+    if @item.buy_item_info.present? == true
+      redirect_to root_path 
+    end
   end
 
   def update
