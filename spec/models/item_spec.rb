@@ -19,7 +19,6 @@ RSpec.describe User, type: :model do
       it 'ユーザーが紐づいていない' do
         # itemレコードに紐づくuserテーブルを参照
         @item.user = nil
-        # binding.pry
         @item.valid?
         expect(@item.errors.full_messages).to include('User must exist')
       end
