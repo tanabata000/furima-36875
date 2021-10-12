@@ -5,9 +5,7 @@ class OrdersController < ApplicationController
   before_action :order_new, only: [:index, :new]
 
   def index
-    if @item.buy_item_info.present? == true
-      redirect_to root_path 
-    end
+    redirect_to root_path if @item.buy_item_info.present? == true
     # http://localhost:3000/items/6/orders
   end
 
