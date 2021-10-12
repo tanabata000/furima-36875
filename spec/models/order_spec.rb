@@ -13,6 +13,10 @@ RSpec.describe Order, type: :model do
       it '購入が正常にできる' do
         expect(@order).to be_valid
       end
+      it '建物名がなくても登録できる' do
+        @order.building = nil
+        expect(@order).to be_valid
+      end
     end
 
     context '購入できないとき' do
