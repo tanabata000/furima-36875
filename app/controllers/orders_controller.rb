@@ -2,14 +2,10 @@ class OrdersController < ApplicationController
   # メソッドのセットアップ
   before_action :authenticate_user!
   before_action :item_find, only: [:index, :create]
-  before_action :order_new, only: [:index, :new]
+  before_action :order_new, only: [:index]
 
   def index
     redirect_to root_path if @item.buy_item_info.present? == true
-    # http://localhost:3000/items/6/orders
-  end
-
-  def new
   end
 
   def create
@@ -23,7 +19,6 @@ class OrdersController < ApplicationController
       render 'index'
     end
   end
-  # tok_11693c7fc1d614a60e2b3af1b911
 
   private
 
