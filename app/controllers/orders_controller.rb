@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  
   # メソッドのセットアップ
   before_action :authenticate_user!
   before_action :item_find, only: [:index, :create]

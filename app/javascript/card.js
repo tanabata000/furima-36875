@@ -28,7 +28,6 @@ const pay = () => {
         const tokenObj = `<input value=${token} name='token' type="hidden"> `;
         // HTMLにtokenObj要素を追加（renderDomの内部の最後の子要素の後に追加）
         renderDom.insertAdjacentHTML("beforeend", tokenObj);
-        debugger;
       }
       // クレジットカードの情報を削除
       document.getElementById("card-number").removeAttribute("name");
