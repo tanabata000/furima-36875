@@ -1,7 +1,6 @@
-class BuyItemInfo < ApplicationRecord
+class ShippingAddress < ApplicationRecord
   # アソシエーション設定
-  belongs_to :user
-  belongs_to :item
+  belongs_to :buy_item_info
 
   # バリデーション
   # フォームオブジェクト（Order）に記載

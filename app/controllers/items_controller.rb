@@ -1,5 +1,4 @@
 class ItemsController < ApplicationController
-  
   # 未ログインユーザーをログインページにリダイレクトする。例外アクション[:index, :show]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :item_find, except: [:index, :new, :create]
@@ -29,11 +28,8 @@ class ItemsController < ApplicationController
   end
 
   def edit
-# 【購入機能】実装時にコメントアウト解除
-    # elsif @item.buy_item_info.present? == true
-      # 製品が購入されている場合、一覧画面に遷移
-      # redirect_to root_path
-# //【購入機能】実装時にコメントアウト解除
+    # 製品が購入されている場合、一覧画面に遷移
+    redirect_to root_path if @item.buy_item_info.present? == true
   end
 
   def update
@@ -54,7 +50,8 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:image, :item_name, :item_info, :item_category_id, :item_sales_status_id, :item_shipping_fee_status_id, :item_prefecture_id, :item_scheduled_delivery_id, :item_price).merge(user_id: current_user.id)
+    params.require(:item).permit(:image, :item_name, :item_info, :item_category_id, :item_sales_status_id,
+                                 :item_shipping_fee_status_id, :item_prefecture_id, :item_scheduled_delivery_id, :item_price).merge(user_id: current_user.id)
   end
 
   def item_find
@@ -63,9 +60,6 @@ class ItemsController < ApplicationController
 
   # ログインユーザーと出品者が一致しない場合、一覧ページに遷移
   def move_to_index
-    if current_user != @item.user
-      redirect_to root_path
-    end
+    redirect_to root_path if current_user != @item.user
   end
-  
 end
