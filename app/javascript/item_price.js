@@ -10,21 +10,24 @@ function sell_price_content (){
   const AddTaxPrice = document.getElementById("add-tax-price")
   // 販売利益の表示部分（対象id:profit）
   const Profit = document.getElementById("profit");
-  // 販売手数料のパーセンテージ（数値のみ入力）
-  const TaxRate=10
+  // 販売手数料率
+  const TaxRate = 0.1
   
   // キーボード入力によりイベント発火
   ItemPrice.addEventListener("input", () => {
+    // 価格から計算される値
     // 価格の入力値をItemValに代入
     let ItemPriceVal = ItemPrice.value; 
-    //HTML要素の書き換え（対象id:add-tax-price）。小数点以下切り捨て（入力値/販売手数料レート）:カンマ表記あり
-    AddTaxPrice.innerHTML = Math.floor(ItemPriceVal / TaxRate).toLocaleString(); 
-    // 販売手数料の値（カンマ除外）をAddTaxPriceValに代入
-    let AddTaxPriceVal = parseFloat(AddTaxPrice.innerHTML)
-    //HTML要素の書き換え（対象id:profit"）。小数点以下切り捨て（価格-販売手数料）:カンマ表記あり
-    Profit.innerHTML = Math.floor(ItemPriceVal - AddTaxPriceVal).toLocaleString();
-    // 販売利益の値（カンマ除外）をProfitValに代入
-    let ProfitVal = Profit.innerHTML
+    // 販売手数料を計算（価格＊販売手数料率）。小数点以下切り捨て
+    let AddTaxPriceVal = Math.floor(ItemPriceVal * TaxRate)
+    // 販売利益を計算（価格＊販売手数料）。小数点以下切り捨て
+    let ProfitVal = Math.floor(ItemPriceVal - AddTaxPriceVal)
+   
+    // HTML要素の書き換え（価格の入力値により自動表示）
+    // 販売手数料表示。書き換え対象：id:add-tax-price。カンマ表記あり
+    AddTaxPrice.innerHTML = AddTaxPriceVal.toLocaleString(); 
+    //販売利益表示。書き換え対象：id:profit。カンマ表記あり
+    Profit.innerHTML = ProfitVal.toLocaleString();
   });
   }
 };
