@@ -1,0 +1,31 @@
+# モデルのエラーメッセージを日本語化（固有名詞には順次日本語訳をつける）
+ja:
+  # 対象モデルがActiveRecordを継承している場合
+  activerecord:
+    attributes:
+      item:
+        user: ユーザー
+        image: 画像
+        item_name: 商品名
+        item_info: 商品の説明
+        item_price: 価格
+        item_category_id: カテゴリー
+        item_prefecture_id: 発送元の地域
+        item_sales_status_id: 商品の状態
+        item_scheduled_delivery_id: 配送までの日数
+        item_shipping_fee_status_id: 配送料の負担
+
+  # 対象モデルがActiveRecordを継承していない場合（モデルのクラス名から確認可能）
+  activemodel:
+    attributes:
+      order:
+        user_id: ユーザー
+        item_id: 商品情報
+        postal_code: 郵便番号
+        item_prefecture_id: 都道府県
+        city: 市区町村
+        addresses: 番地
+        phone_number: 電話番号 
+        token: クレジットカード情報
+
+

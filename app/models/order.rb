@@ -20,9 +20,8 @@ class Order
   validates :user_id, presence: true
   # shipping_addressのバリデーション
   validates :postal_code, presence: true, format: { with: postal_code_num }
-
   validates :item_prefecture_id, presence: true
-  validates :item_prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :item_prefecture_id, numericality: { other_than: 1, message: "を入力してください" }
   validates :city, presence: true
   validates :addresses, presence: true
   validates :phone_number, presence: true
