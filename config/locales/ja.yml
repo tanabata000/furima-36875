@@ -1,8 +1,10 @@
+# モデルのエラーメッセージを日本語化（固有名詞には順次日本語訳をつける）
 ja:
   # 対象モデルがActiveRecordを継承している場合
   activerecord:
     attributes:
       item:
+        user: ユーザー
         image: 画像
         item_name: 商品名
         item_info: 商品の説明
@@ -17,10 +19,12 @@ ja:
   activemodel:
     attributes:
       order:
+        user_id: ユーザー
+        item_id: 商品情報
         postal_code: 郵便番号
         item_prefecture_id: 都道府県
         city: 市区町村
-        address: 番地
+        addresses: 番地
         phone_number: 電話番号 
         token: クレジットカード情報
 
