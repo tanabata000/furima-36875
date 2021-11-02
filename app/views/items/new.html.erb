@@ -4,6 +4,7 @@
     <script src="item_price.js"></script>
     <%= link_to image_tag('furima-logo-color.png' , size: '185x50'), "root_path" %>
   </header>
+  
   <div class="items-sell-main">
     <h2 class="items-sell-title">商品の情報を入力</h2>
     <%= form_with model: @item, local: true do |f| %>
@@ -35,6 +36,7 @@
       </div>
       <%= f.text_area :item_name, class:"items-text", id:"item-name", placeholder:"商品名（必須 40文字まで)", maxlength:"40" %>
       <div class="items-explain">
+
         <div class="weight-bold-text">
           商品の説明
           <span class="indispensable">必須</span>
@@ -47,19 +49,19 @@
     <%# 商品の詳細 %>
     <div class="items-detail">
       <div class="weight-bold-text">商品の詳細</div>
-      <div class="form">
-        <div class="weight-bold-text">
-          カテゴリー
-          <span class="indispensable">必須</span>
+        <div class="form">
+          <div class="weight-bold-text">
+            カテゴリー
+            <span class="indispensable">必須</span>
+          </div>
+          <%= f.collection_select(:item_category_id, ItemCategory.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %>
+          <div class="weight-bold-text">
+            商品の状態
+            <span class="indispensable">必須</span>
+          </div>
+          <%= f.collection_select(:item_sales_status_id, ItemSalesStatus.all, :id, :name, {}, {class:"select-box", id:"item-sales-status"}) %>
         </div>
-        <%= f.collection_select(:item_category_id, ItemCategory.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %>
-        <div class="weight-bold-text">
-          商品の状態
-          <span class="indispensable">必須</span>
-        </div>
-        <%= f.collection_select(:item_sales_status_id, ItemSalesStatus.all, :id, :name, {}, {class:"select-box", id:"item-sales-status"}) %>
       </div>
-    </div>
     <%# /商品の詳細 %>
 
     <%# 配送について %>

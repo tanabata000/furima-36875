@@ -30,10 +30,10 @@ class Order
   validates :token, presence: true
 
   def save
-    # 寄付情報を保存し、変数donationに代入する
+    # 寄付情報を保存し、変数buy_item_infoに代入する
     buy_item_info = BuyItemInfo.create(item_id: item_id, user_id: user_id)
     # 住所を保存する
-    # donation_idには、変数donationのidと指定する
+    # buy_item_info_idには、変数buy_item_infoのidと指定する
     ShippingAddress.create(postal_code: postal_code, item_prefecture_id: item_prefecture_id, city: city, addresses: addresses,
                            building: building, phone_number: phone_number, buy_item_info_id: buy_item_info.id)
   end
