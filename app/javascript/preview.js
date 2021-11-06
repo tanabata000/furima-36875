@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function(){
       // 表示する画像を生成
       const blobImage = document.createElement('img');
       blobImage.setAttribute('src', blob);
+      // 画像サイズ調整
       blobImage.width=300;
       blobImage.height=200;
       // 生成したHTMLの要素をブラウザに表示させる
