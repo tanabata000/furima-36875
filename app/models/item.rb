@@ -13,8 +13,10 @@ class Item < ApplicationRecord
   belongs_to :item_shipping_fee_status
 
   # Active Storageとのアソシエーション設定
-  # アソシエーションを組むと同時にでカラム名を決定する。カラム名＝image
-  has_one_attached :image
+  # アソシエーションを組むと同時にでカラム名を決定する。カラム名＝images
+  # 複数の画像を投稿したい場合はhas_many_attachedに変更
+  has_many_attached :images
+  # has_one_attached :image
 
   # 正規表現
   # 全て半角数字

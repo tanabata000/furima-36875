@@ -24,8 +24,12 @@
         <p>
           クリックしてファイルをアップロード
         </p>
+        <%# 複数の画像に対応できるように編集し、送信する際に必要な画像の配列をname属性に設定 %>
         <%= f.file_field :image, id:"item-image" %>
-        <div id="image-list"></div>
+        <%= f.file_field :images, name: "item[images][]", id:"item-images" %>
+        <% @item.images.each do |image| %>
+          <div id="image-list"></div>
+        <% end %>
       </div>
     </div>
     <%# /商品画像 %>
